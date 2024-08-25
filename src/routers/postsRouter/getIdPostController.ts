@@ -6,7 +6,7 @@ import {PostViewModel} from '../../types';
 export const getIdPostController = (req: Request<{id: string}>, res: Response<PostViewModel>) =>{
    
     
-    const foundItem: PostViewModel = db.videos.find(c => c.id === +req.params.id);
+    const foundItem: PostViewModel = db.posts.find(c => c.id === +req.params.id);
     
     if(!foundItem) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);

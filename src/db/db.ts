@@ -1,7 +1,9 @@
 export type DBType = {
-    videos: any[]
+    blogs: any[],
+    posts: any[]
 };
 
 export const db: DBType = {
-    videos: []
+    blogs: [],
+    posts: []
 }

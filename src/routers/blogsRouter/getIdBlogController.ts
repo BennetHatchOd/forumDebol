@@ -6,7 +6,7 @@ import {BlogViewModel } from '../../types';
 export const getIdBlogController = (req: Request<{id: string}>, res: Response<BlogViewModel >) =>{
    
     
-    const foundItem: Video = db.videos.find(c => c.id === +req.params.id);
+    const foundItem: BlogViewModel = db.blogs.find(c => c.id === +req.params.id);
     
     if(!foundItem) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
