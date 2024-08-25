@@ -1,39 +1,40 @@
 
 
-type Error = {
+type FieldError = {
     message: string,
     field: string
 }
 
-export type Errors = {
-    errorsMessages: Array<Error>
+export type APIErrorResult = {
+    errorsMessages: Array<FieldError>
 }
 
-export type Video = {
-    id: number,
+export type BlogInputModelVideo = {
+    name: string,
+    description: string,
+    websiteUrl:	string
+}
+
+export type BlogViewModel = {
+    id:	string,
+    name: string,
+    description: string,
+    websiteUrl:	string
+}
+
+
+export type PostInputModel = {
     title:	string,
-    author:	string,
-    availableResolutions: Array<string>, 
-    canBeDownloaded:	boolean,
-    minAgeRestriction: null | number,
-    publicationDate: string
-    createdAt:	string
+    shortDescription: string,
+    content: string,
+    blogId:	string,
 }
 
-export type CreateVideo = {
+export type PostViewModel = {
+    id:	string,
     title:	string,
-    author:	string,
-    availableResolutions: Array<string>, 
+    shortDescription: string,
+    content: string,
+    blogId:	string,
+    blogName:	string
 }
-
-
-export type CorrectVideo = {
-    title:	string,
-    author:	string,
-    availableResolutions: Array<string>, 
-    canBeDownloaded:	boolean,
-    minAgeRestriction: null | number,
-    publicationDate: string
-}
-
-
