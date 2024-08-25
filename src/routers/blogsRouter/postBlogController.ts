@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
 import {db} from '../../db/db';
 import * as SETTING from '../../setting';
-import {Video, CreateVideo, Errors } from '../interfaces';
+import {BlogViewModel, BlogInputModelVideo, APIErrorResult } from '../../types';
 import { isArray } from "util";
 
 
 
-export const postBlogController = (req: Request<{},{},CreateVideo>, res: Response<Video|Errors>) =>{
+export const postBlogController = (req: Request<{},{},BlogInputModelVideo>, res: Response<BlogViewModel|APIErrorResult>) =>{
     
-  let errors: Errors = findErrorValidData(req.body);
+  let errors: APIErrorResult = findErrorValidData(req.body);
 
     if(errors.errorsMessages.length == 0){
 
@@ -43,7 +43,7 @@ console.log(errors);
     return;
 }
       
-    function findErrorValidData(body: CreateVideo){
+    function findErrorValidData(body: BlogInputModelVideo){
      
       const errors :Errors  = {errorsMessages: []};
 

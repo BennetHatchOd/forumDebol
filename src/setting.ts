@@ -2,12 +2,7 @@ import {config} from 'dotenv';
 
 
 export const SETTING = {
-    PORT: process.env.PORT || 3014,
-    PATH: {
-        VIDEO: '/videos',
-        VIDEOID: '/videos/:id',
-        TEST_CLEAR_DB: '/testing/all-data'
-    }
+    PORT: process.env.PORT || 3014
 };
 
 export const HTTP_STATUSES = {

@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import {db} from '../../db/db';
 import {HTTP_STATUSES} from '../../setting';
-import {Video} from '../interfaces';
+import {BlogViewModel } from '../../types';
 
-export const getIdBlogController = (req: Request<{id: string}>, res: Response<Video>) =>{
+export const getIdBlogController = (req: Request<{id: string}>, res: Response<BlogViewModel >) =>{
    
     
     const foundItem: Video = db.videos.find(c => c.id === +req.params.id);

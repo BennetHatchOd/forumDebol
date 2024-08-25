@@ -4,7 +4,7 @@ import {HTTP_STATUSES} from '../../setting';
 
 export const deleteIdPostController = (req: Request<{id: string}>, res: Response) =>{
     
-    const index = db.videos.findIndex(n => n.id === +req.params.id);
+    const index : number = db.videos.findIndex(n => n.id === +req.params.id);
   
     if(index == -1){
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
