@@ -2,7 +2,4 @@
 /dist
 .env
 /.vscode
-/node_modules
-/dist
-.env
-/.vscode
+src/temp.js
