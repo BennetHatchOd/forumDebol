@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import {db} from '../../db/db';
 import * as SETTING from '../../setting';
-import {Video, CorrectVideo, Errors } from '../interfaces';
+import {BlogViewModel, BlogInputModelVideo, APIErrorResult } from '../../types';
 
-export const putBlogController = (req: Request<{id: string},{},CorrectVideo>, res: Response<Errors>) =>{
+export const putBlogController = (req: Request<{id: string},{},BlogInputModelVideo>, res: Response<APIErrorResult>) =>{
     
-  const foundVideo: Video = db.videos.find(c => c.id === +req.params.id);
+  const foundVideo: BlogViewModel = db.videos.find(c => c.id === +req.params.id);
     if(!foundVideo) {
       res.sendStatus(SETTING.HTTP_STATUSES.NOT_FOUND_404);
       return;
@@ -37,7 +37,7 @@ export const putBlogController = (req: Request<{id: string},{},CorrectVideo>, re
 }
       
 
-    function findErrorValidData(body: CorrectVideo){
+    function findErrorValidData(body: BlogInputModelVideo){
 
         const errors :Errors = {errorsMessages: []};
 

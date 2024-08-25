@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
 import {db} from '../../db/db';
 import * as SETTING from '../../setting';
-import {Video, CreateVideo, Errors } from '../interfaces';
+import {PostViewModel, PostInputModel, APIErrorResult } from '../../types';
 import { isArray } from "util";
 
 
 
-export const postPostController = (req: Request<{},{},CreateVideo>, res: Response<Video|Errors>) =>{
+export const postPostController = (req: Request<{},{},PostInputModel>, res: Response<PostViewModel|APIErrorResult>) =>{
     
-  let errors: Errors = findErrorValidData(req.body);
+  let errors: APIErrorResult = findErrorValidData(req.body);
 
     if(errors.errorsMessages.length == 0){
 
@@ -18,7 +18,7 @@ export const postPostController = (req: Request<{},{},CreateVideo>, res: Respons
 
         const id = today.getHours() * 1000000000 + today.getMinutes() * 1000000 + today.getSeconds() * 1000 + today.getMilliseconds();
       
-        const newVideo: Video = {
+        const newVideo: PostViewModel = {
           id: id,
           title:	req.body.title,
           author:	req.body.author,
@@ -43,9 +43,9 @@ console.log(errors);
     return;
 }
       
-    function findErrorValidData(body: CreateVideo){
+    function findErrorValidData(body: PostInputModel){
      
-      const errors :Errors  = {errorsMessages: []};
+      const errors :APIErrorResult  = {errorsMessages: []};
 
           if(typeof(body.title) != "string" || body.title.length == 0 || body.title.length > 40)
             errors.errorsMessages.push(SETTING.foundError.title);

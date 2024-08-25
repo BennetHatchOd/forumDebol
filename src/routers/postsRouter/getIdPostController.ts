@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import {db} from '../../db/db';
 import {HTTP_STATUSES} from '../../setting';
-import {Video} from '../interfaces';
+import {PostViewModel} from '../../types';
 
-export const getIdPostController = (req: Request<{id: string}>, res: Response<Video>) =>{
+export const getIdPostController = (req: Request<{id: string}>, res: Response<PostViewModel>) =>{
    
     
-    const foundItem: Video = db.videos.find(c => c.id === +req.params.id);
+    const foundItem: PostViewModel = db.videos.find(c => c.id === +req.params.id);
     
     if(!foundItem) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);

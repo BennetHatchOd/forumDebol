@@ -1,17 +1,17 @@
 import { Request, Response } from "express";
 import {db} from '../../db/db';
 import * as SETTING from '../../setting';
-import {Video, CorrectVideo, Errors } from '../interfaces';
+import {PostViewModel, PostInputModel, APIErrorResult } from '../../types';
 
-export const putPostController = (req: Request<{id: string},{},CorrectVideo>, res: Response<Errors>) =>{
+export const putPostController = (req: Request<{id: string},{},PostInputModel>, res: Response<APIErrorResult>) =>{
     
-  const foundVideo: Video = db.videos.find(c => c.id === +req.params.id);
+  const foundVideo: PostViewModel = db.videos.find(c => c.id === +req.params.id);
     if(!foundVideo) {
       res.sendStatus(SETTING.HTTP_STATUSES.NOT_FOUND_404);
       return;
     }
     
-  let errors: Errors = findErrorValidData(req.body);
+  let errors: APIErrorResult = findErrorValidData(req.body);
 
   if(errors.errorsMessages.length == 0){
 
@@ -37,9 +37,9 @@ export const putPostController = (req: Request<{id: string},{},CorrectVideo>, re
 }
       
 
-    function findErrorValidData(body: CorrectVideo){
+    function findErrorValidData(body: PostInputModel){
 
-        const errors :Errors = {errorsMessages: []};
+        const errors :APIErrorResult = {errorsMessages: []};
 
         if(typeof(body.title) != "string" || body.title.length == 0 || body.title.length > 40)
             errors.errorsMessages.push(SETTING.foundError.title);
