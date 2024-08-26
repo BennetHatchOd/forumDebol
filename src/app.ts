@@ -1,7 +1,7 @@
 import express from 'express';
-import {SETTING, HTTP_STATUSES} from './setting';
+import {HTTP_STATUSES} from './setting';
 import cors from 'cors'
-import { blob } from 'stream/consumers';
+//import { blob } from 'stream/consumers';
 import { blogsRouter } from './routers/blogsRouter';
 import { postsRouter } from './routers/postsRouter';
 import { deleteAllController } from './routers/deleteAllController';
@@ -11,7 +11,7 @@ import { deleteAllController } from './routers/deleteAllController';
 
 export const app = express();
 
-app.use(cors);
+app.use(cors());
 
 
 const jsonBodyMiddleware = express.json();
