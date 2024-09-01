@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import { HTTP_STATUSES } from "../../setting";
-import {BlogViewModel, BlogInputModelVideo, APIErrorResult } from '../../types';
+import {BlogViewModel, BlogInputModel, APIErrorResult } from '../../types';
 import { blogRepository } from "../../repository/blogRepository";
 
 
 
-export const postBlogController = (req: Request<{},{},BlogInputModelVideo>, res: Response<BlogViewModel|APIErrorResult>) =>{
+export const postBlogController = (req: Request<{},{},BlogInputModel>, res: Response<BlogViewModel|APIErrorResult>) =>{
     
     const id: string = blogRepository.create(req.body);  // for my tests
     const blog: BlogViewModel|null = blogRepository.find(id);  

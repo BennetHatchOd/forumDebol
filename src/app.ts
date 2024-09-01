@@ -1,7 +1,5 @@
 import express from 'express';
-import {HTTP_STATUSES} from './setting';
 import cors from 'cors'
-//import { blob } from 'stream/consumers';
 import { blogsRouter } from './routers/blogsRouter';
 import { postsRouter } from './routers/postsRouter';
 import { deleteAllController } from './routers/deleteAllController';

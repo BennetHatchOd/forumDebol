@@ -9,7 +9,7 @@ export type APIErrorResult = {
     errorsMessages: Array<FieldError>
 }
 
-export type BlogInputModelVideo = {
+export type BlogInputModel = {
     name: string,
     description: string,
     websiteUrl:	string

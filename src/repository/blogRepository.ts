@@ -1,4 +1,4 @@
-import { BlogViewModel, BlogInputModelVideo } from "../types";
+import { BlogViewModel, BlogInputModel } from "../types";
 import {db} from "../db/db"
 
 export const blogRepository = {
@@ -12,7 +12,7 @@ export const blogRepository = {
     return searchItem;
     },
         
-    create(createItem: BlogInputModelVideo): string{
+    create(createItem: BlogInputModel): string{
 
         let today = new Date();
         const id = today.getHours() * 1000000000 + today.getMinutes() * 1000000 + today.getSeconds() * 1000 + today.getMilliseconds();
@@ -34,7 +34,7 @@ export const blogRepository = {
         return true;
     },
     
-    edit(id: string, correctBlog: BlogInputModelVideo): boolean{
+    edit(id: string, correctBlog: BlogInputModel): boolean{
         const foundBlog: BlogViewModel = db.blogs.find(c => c.id === id);//Promise
         if(!foundBlog)
             return false;
