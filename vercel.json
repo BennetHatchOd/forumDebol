@@ -1,5 +1,6 @@
 {
     "version": 2,
+    "name": "forumDebol-vercel",
     "builds": [
       {
         "src": "src/index.ts",
