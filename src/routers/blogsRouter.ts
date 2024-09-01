@@ -4,7 +4,7 @@ import { getBlogByIdController } from './blogs/getBlogByIdController';
 import { deleteBlogByIdController } from './blogs/deleteBlogByIdController';
 import { putBlogController } from './blogs/putBlogController';
 import { postBlogController } from './blogs/postBlogController';
-import { body } from 'express-validator';
+//import { body } from 'express-validator';
 import { authorizator } from './authorizator';
 import {inputValidation, blogValidator} from './validators'
 
