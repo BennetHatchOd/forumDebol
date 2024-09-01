@@ -3,7 +3,7 @@ import {db} from '../../db/db';
 import {HTTP_STATUSES} from '../../setting';
 import {PostViewModel} from '../../types';
 
-export const getIdPostController = (req: Request<{id: string}>, res: Response<PostViewModel>) =>{
+export const getPostByIdController = (req: Request<{id: string}>, res: Response<PostViewModel>) =>{
    
     
     const foundItem: PostViewModel = db.posts.find(c => c.id === +req.params.id);
