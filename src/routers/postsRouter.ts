@@ -5,7 +5,7 @@ import { deletePostByIdController } from './posts/deletePostByIdController';
 import { putPostController } from './posts/putPostController';
 import { postPostController } from './posts/postPostController';
 //import { body } from 'express-validator';
-import {inputValidation, postValidator} from '../validators'
+import {inputValidation, postValidator} from './validators'
 //import { blogRepository } from '../repository/blogRepository';
 
 

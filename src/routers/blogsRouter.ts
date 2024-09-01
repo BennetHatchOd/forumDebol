@@ -5,14 +5,9 @@ import { deleteBlogByIdController } from './blogs/deleteBlogByIdController';
 import { putBlogController } from './blogs/putBlogController';
 import { postBlogController } from './blogs/postBlogController';
 import { body } from 'express-validator';
-import {inputValidation, blogValidator} from '../validators'
+import {inputValidation, blogValidator} from './validators'
 
 export const blogsRouter = Router({});
-
-
-
-
-
 
 blogsRouter.get('/', getBlogController);
 blogsRouter.get('/:id', getBlogByIdController);

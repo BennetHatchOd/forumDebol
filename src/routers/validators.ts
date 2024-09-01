@@ -2,7 +2,7 @@ import { Response, Request, NextFunction } from "express";
 import {validationResult} from 'express-validator';
 //import { APIErrorResult } from "./types";
 import {body} from 'express-validator'
-import { blogRepository } from "./repository/blogRepository";
+import { blogRepository } from "../repository/blogRepository";
 
 export const inputValidation = (req: Request, res: Response, next: NextFunction) =>{
      
