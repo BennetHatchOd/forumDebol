@@ -10,7 +10,7 @@ import {inputValidation, blogValidator} from './validators'
 
 export const blogsRouter = Router({});
 
-blogsRouter.get('/', authorizator, getBlogController);
+blogsRouter.get('/', getBlogController);
 blogsRouter.get('/:id', getBlogByIdController);
 blogsRouter.delete('/:id', authorizator, deleteBlogByIdController);
 blogsRouter.put('/:id', authorizator, blogValidator, inputValidation, putBlogController);
