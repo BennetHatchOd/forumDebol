@@ -1,17 +1,15 @@
 import { Request, Response } from "express";
-import {db} from '../../db/db';
+import { postRepository } from "../../repository/postRepository";
 import {HTTP_STATUSES} from '../../setting';
 import {PostViewModel} from '../../types';
 
 export const getPostByIdController = (req: Request<{id: string}>, res: Response<PostViewModel>) =>{
    
     
-    const foundItem: PostViewModel = db.posts.find(c => c.id === +req.params.id);
+    const foundPost: PostViewModel | null = postRepository.find(req.params.id);
     
-    if(!foundItem) {
+    if(!foundPost)
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
-        return;
-    }
-    res.status(HTTP_STATUSES.OK_200);
-    res.json(foundItem);
+    else
+        res.status(HTTP_STATUSES.OK_200).json(foundPost);
 }

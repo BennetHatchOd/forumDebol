@@ -4,10 +4,8 @@ import { postRepository } from "../../repository/postRepository";
 
 export const deletePostByIdController = (req: Request<{id: string}>, res: Response) =>{
     
-    if(postRepository.delete(req.params.id)){
+    if(postRepository.delete(req.params.id))
         res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
-        return;
-    }
-    
-    res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
+    else
+        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
     }
