@@ -1,19 +1,25 @@
 import { Response, Request, NextFunction } from "express";
-import {validationResult} from 'express-validator';
-//import { APIErrorResult } from "./types";
+import {FieldValidationError, validationResult} from 'express-validator';
 import {body} from 'express-validator'
 import { blogRepository } from "../repository/blogRepository";
+import { HTTP_STATUSES } from "../setting";
 
 export const inputValidation = (req: Request, res: Response, next: NextFunction) =>{
      
-     if(validationResult(req).isEmpty())
+     if(validationResult(req).isEmpty()){
             next();
-    
-    const resultError = validationResult(req).array({ onlyFirstError: true }).map(item => ({
-        message: item.msg,
-        field:   item.path,
-    }));
-     res.send(resultError);
+            return;
+     }
+  
+    const resultError = validationResult(req).array({ onlyFirstError: true }).map(item => {
+        const err = item as unknown as FieldValidationError
+        
+        return{message: err.msg,
+        field:   err.path,}
+
+    });
+
+    res.status(HTTP_STATUSES.BAD_REQUEST_400).send({errorsMessages: resultError});
 
 }         
 
