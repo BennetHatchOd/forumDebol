@@ -7,8 +7,8 @@ export const blogRepository = {
     find(id: string): BlogViewModel | null {
         const searchItem: BlogViewModel = db.blogs.find(c => c.id === id);//Promise
         
-        if(!searchItem) 
-            return null;
+    if(!searchItem) 
+        return null;
 
     return searchItem;
     },

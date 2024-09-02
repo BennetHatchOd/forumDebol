@@ -14,11 +14,13 @@ export const inputValidation = (req: Request, res: Response, next: NextFunction)
     const resultError = validationResult(req).array({ onlyFirstError: true }).map(item => {
         const err = item as unknown as FieldValidationError
         
-        return{message: err.msg,
-        field:   err.path,}
+        return{
+            message: err.msg,
+            field:   err.path,
+        }
 
     });
-
+    console.log(resultError);
     res.status(HTTP_STATUSES.BAD_REQUEST_400).send({errorsMessages: resultError});
 
 }         
@@ -43,6 +45,7 @@ export const postValidator = [
                             .withMessage("Not correct description's length"),
     body('content').isLength({min: 1, max: 100})
                     .withMessage("Not correct content's length"),
-    body('blogId').custom(value => {if(!blogRepository.find(value))
-                                    throw new Error("BlogId isn't correct");}),
+    body('blogId').custom(value => {
+                        return blogRepository.find(value);
+                        }).withMessage("BlogId isn't correct"),
 ]
