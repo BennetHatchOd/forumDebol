@@ -29,7 +29,8 @@ export const blogValidator = [
     body('name').trim()
                 .isLength({min: 1, max: 15})
                 .withMessage("Not correct name's length"),
-    body('description').isLength({max: 500})
+    body('description').trim() 
+                        .isLength({max: 500})
                         .withMessage("Not correct description's length"),
     body('websiteUrl').matches(/^https:\/\/([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*\/?$/)
                     .withMessage("Not correct url adress"),
@@ -41,11 +42,14 @@ export const postValidator = [
     body('title').trim()
                 .isLength({min: 1, max: 30})
                 .withMessage("Not correct title's length"),
-    body('shortDescription').isLength({min: 1, max: 100})
+    body('shortDescription').trim()
+                            .isLength({min: 1, max: 100})
                             .withMessage("Not correct description's length"),
-    body('content').isLength({min: 1, max: 100})
+    body('content').trim()
+                    .isLength({min: 1, max: 100})
                     .withMessage("Not correct content's length"),
     body('blogId').custom(value => {
                         return blogRepository.find(value);
-                        }).withMessage("BlogId isn't correct"),
+                        })
+                        .withMessage("BlogId isn't correct"),
 ]
