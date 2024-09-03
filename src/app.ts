@@ -4,7 +4,12 @@ import { blogsRouter } from './routers/blogsRouter';
 import { postsRouter } from './routers/postsRouter';
 import { deleteAllController } from './routers/deleteAllController';
 
-
+export const URL_PATH = {
+    base:       '/',
+    blogs:      '/blogs',
+    posts:      '/posts',
+    deleteAll:  '/testing/all-data',
+}
 
 
 export const app = express();
@@ -12,19 +17,19 @@ export const app = express();
 app.use(cors());
 
 
-//const jsonBodyMiddleware = express.json();
-app.use(express.json());
+const jsonBodyMiddleware = express.json();
+app.use(jsonBodyMiddleware);
 
 
-app.get('/', (req,res) => {   
+app.get(URL_PATH.base, (req,res) => {   
     
     res.status(200).json({version: '1.0 '});
     
 })
 
-app.use('/blogs', blogsRouter);
-app.use('/posts', postsRouter);
-app.delete('/testing/all-data', deleteAllController);
+app.use(URL_PATH.blogs, blogsRouter);
+app.use(URL_PATH.posts, postsRouter);
+app.delete(URL_PATH.deleteAll, deleteAllController);
 
 
 

@@ -81,6 +81,13 @@ export const postRepository = {
         return true;
     },
 
+// deletes all posts from base
+    clear(): boolean {
+        db.posts = [];
+        return true;
+    }
+
+
 // returns list of all posts 
     view(): PostViewModel[]{
         const posts: PostViewModel[] = db.posts;//Promise

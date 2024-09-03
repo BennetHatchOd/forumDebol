@@ -50,6 +50,12 @@ export const blogRepository = {
         return true;
     },
 
+// deletes all blogs from base
+    clear(): boolean {
+        db.blogs = [];
+        return true;
+    }
+
 // returns list of all blogs    
     view(): BlogViewModel[]{
         const blogs: BlogViewModel[] = db.blogs;//Promise
