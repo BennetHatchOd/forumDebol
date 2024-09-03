@@ -20,7 +20,7 @@ export const inputValidation = (req: Request, res: Response, next: NextFunction)
         }
 
     });
-    console.log(resultError);
+
     res.status(HTTP_STATUSES.BAD_REQUEST_400).send({errorsMessages: resultError});
 
 }         

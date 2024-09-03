@@ -3,13 +3,9 @@ import cors from 'cors'
 import { blogsRouter } from './routers/blogsRouter';
 import { postsRouter } from './routers/postsRouter';
 import { deleteAllController } from './routers/deleteAllController';
+import { URL_PATH } from './setting';
 
-export const URL_PATH = {
-    base:       '/',
-    blogs:      '/blogs',
-    posts:      '/posts',
-    deleteAll:  '/testing/all-data',
-}
+
 
 
 export const app = express();

@@ -85,8 +85,7 @@ export const postRepository = {
     clear(): boolean {
         db.posts = [];
         return true;
-    }
-
+    },
 
 // returns list of all posts 
     view(): PostViewModel[]{

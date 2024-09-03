@@ -1,6 +1,6 @@
 import request from "supertest";
-import {HTTP_STATUSES} from '../../src/setting';
-import {app, URL_PATH} from '../../src/app'
+import {HTTP_STATUSES, URL_PATH} from '../../src/setting';
+import {app} from '../../src/app'
 
 
 describe('/posts', () => {
@@ -32,7 +32,8 @@ describe('/posts', () => {
                 })
                 .expect(HTTP_STATUSES.CREATED_201);
          createdBlog_ = res.body;
-        console.log(createdBlog_.id, typeof(createdBlog_.id));
+       
+         
           res = await request(app)
                 .post(URL_PATH.posts)
                 .set("Authorization", "Basic YWRtaW46cXdlcnR5")

@@ -14,3 +14,9 @@ export const HTTP_STATUSES = {
     NOT_FOUND_404:      404 
 };
 
+export const URL_PATH = {
+    base:       '/',
+    blogs:      '/blogs',
+    posts:      '/posts',
+    deleteAll:  '/testing/all-data',
+}

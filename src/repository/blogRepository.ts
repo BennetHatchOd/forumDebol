@@ -54,7 +54,7 @@ export const blogRepository = {
     clear(): boolean {
         db.blogs = [];
         return true;
-    }
+    },
 
 // returns list of all blogs    
     view(): BlogViewModel[]{
