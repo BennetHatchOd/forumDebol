@@ -1,19 +1,20 @@
 import request from "supertest";
 import {HTTP_STATUSES} from '../../src/setting';
 import {app} from '../../src/app'
+import { URL_PATH } from "../../src/app";
 
 
 describe('/blogs', () => {
 
     beforeAll(async() =>{  // clear db-array
-        await request(app).delete('/testing/all-data');
+        await request(app).delete(URL_PATH.deleteAll);
 
     })
 
     // watch all blogs [get.blog]
     it('should return 200 and empty array', async () => { 
         await request(app)
-                .get('/blogs')
+                .get(URL_PATH.blogs)
                 .expect(HTTP_STATUSES.OK_200, []);    
     })
  
@@ -22,7 +23,7 @@ describe('/blogs', () => {
     // it('should return 201 and created object', async () => { 
     //     let createdResponse = await 
     //             request(app)
-    //             .post('/blogs')
+    //             .post(URL_PATH.blogs)
     //             .set("Authorization", "Basic YWRtaW46cXdlcnR5")
     //             .send({
     //                 name: "The first",
@@ -44,7 +45,7 @@ describe('/blogs', () => {
     // it('should return 201 and created object', async () => { 
     //     let createdResponse2 = await 
     //             request(app)
-    //             .post('/blogs')
+    //             .post(URL_PATH.blogs)
     //             .set("Authorization", "Basic YWRtaW46cXdlcnR5")
     //             .send({
     //                 name: "The second",
@@ -66,7 +67,7 @@ describe('/blogs', () => {
     // it('should return 201 and created object', async () => { 
     //     let createdResponse2 = await 
     //             request(app)
-    //             .post('/blogs')
+    //             .post(URL_PATH.blogs)
     //             .set("Authorization", "Basic YWRtaW46cXdlcnR5")
     //             .send({
     //                 name: "The thirt",
@@ -86,7 +87,7 @@ describe('/blogs', () => {
     // // delete the third blog [delete.blog]
     // it('should return 204', async () => { 
     //     await request(app)
-    //         .delete(`/blogs/${createdBlog3.id}`)
+    //         .delete(`${URL_PATH.blogs}/${createdBlog3.id}`)
     //         .set("Authorization", "Basic YWRtaW46cXdlcnR5")
     //         .expect(HTTP_STATUSES.NO_CONTENT_204);
     // })
@@ -94,7 +95,7 @@ describe('/blogs', () => {
     // // delete not existing blog [delete.blog]
     // it('should return 404', async () => { 
     //     await request(app)
-    //         .delete(`/blogs/55`)
+    //         .delete(`${URL_PATH.blogs}/55`)
     //         .set("Authorization", "Basic YWRtaW46cXdlcnR5")
     //         .expect(HTTP_STATUSES.NOT_FOUND_404);
     // })
@@ -102,7 +103,7 @@ describe('/blogs', () => {
     //   // watch non exist item of blogs [get.blog/hj]
     //   it('should return 404', async () => {
     //     const res = await request(app)
-    //             .get('/blogs/mjjhjn')
+    //             .get(`${URL_PATH.blogs}/mjjhjn`)
     //             .expect(HTTP_STATUSES.NOT_FOUND_404);    
         
     // })
@@ -110,7 +111,7 @@ describe('/blogs', () => {
     //  // watch the first blog  [get.blog/id]
     //  it('should return 200 and object', async () => {
     //     const res = await request(app)
-    //             .get(`/blogs/${createdBlog1.id}`)
+    //             .get(`${URL_PATH.blogs}/${createdBlog1.id}`)
     //             .expect(HTTP_STATUSES.OK_200);  
                   
     //             expect(res.body).toEqual({
@@ -124,14 +125,14 @@ describe('/blogs', () => {
     // // watch all blogs
     // it('should return 200 and array of object', async () => { // watch all db [get.blog]
     //     await request(app)
-    //             .get('/blogs')
+    //             .get(URL_PATH.blogs)
     //             .expect(HTTP_STATUSES.OK_200, [createdBlog1, createdBlog2 ]);    
     //     })
 
     // // create a bad blog [post.blog]
     // it('should return 400 and return object of errors', async () => { 
     //     let res = await request(app)
-    //                     .post('/blogs')
+    //                     .post(URL_PATH.blogs)
     //                     .set("Authorization", "Basic YWRtaW46cXdlcnR5")
     //                     .send({
     //                         name: "",
@@ -156,7 +157,7 @@ describe('/blogs', () => {
     //     // create a bad blog [post.blog]
     //     it('should return 400 and return object of errors', async () => { 
     //         let res = await request(app)
-    //                         .post('/blogs')
+    //                         .post(URL_PATH.blogs)
     //                         .set("Authorization", "Basic YWRtaW46cXdlcnR5")
     //                         .send({
     //                             name: "1234567890123456",
@@ -182,7 +183,7 @@ describe('/blogs', () => {
     // // edit the fisrt blog [post.blog]
     // it('should return 204', async () => { 
     //     await  request(app)
-    //             .put(`/blogs/${createdBlog1.id}`)
+    //             .put(`${URL_PATH.blogs}/${createdBlog1.id}`)
     //             .set("Authorization", "Basic YWRtaW46cXdlcnR5")
     //             .send({
     //                 name: "Correct",
@@ -199,7 +200,7 @@ describe('/blogs', () => {
     // // edit the fisrt blog [post.blog]
     // it('should return 404', async () => { 
     //     await request(app)
-    //             .put(`/blogs/454`)
+    //             .put(`${URL_PATH.blogs}/454`)
     //             .set("Authorization", "Basic YWRtaW46cXdlcnR5")
     //             .send({
     //                 name: "The mistake",

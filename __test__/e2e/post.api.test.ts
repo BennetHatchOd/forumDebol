@@ -1,6 +1,6 @@
 import request from "supertest";
 import {HTTP_STATUSES} from '../../src/setting';
-import {app} from '../../src/app'
+import {app, URL_PATH} from '../../src/app'
 
 
 describe('/posts', () => {
@@ -13,7 +13,7 @@ describe('/posts', () => {
     // watch all posts [get.blog]
     it('should return 200 and empty array', async () => { 
         await request(app)
-                .get('/posts')
+                .get(URL_PATH.posts)
                 .expect(HTTP_STATUSES.OK_200, []);    
     })
  
@@ -23,7 +23,7 @@ describe('/posts', () => {
     it('should return 201 and created object', async () => { 
         let res = await 
                 request(app)
-                .post('/blogs')
+                .post(URL_PATH.blogs)
                 .set("Authorization", "Basic YWRtaW46cXdlcnR5")
                 .send({
                     name: "blogForP",
@@ -34,7 +34,7 @@ describe('/posts', () => {
          createdBlog_ = res.body;
         console.log(createdBlog_.id, typeof(createdBlog_.id));
           res = await request(app)
-                .post('/posts')
+                .post(URL_PATH.posts)
                 .set("Authorization", "Basic YWRtaW46cXdlcnR5")
                 .send({
                     "title": "newPost",
