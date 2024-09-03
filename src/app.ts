@@ -12,8 +12,8 @@ export const app = express();
 app.use(cors());
 
 
-const jsonBodyMiddleware = express.json();
-app.use(jsonBodyMiddleware);
+//const jsonBodyMiddleware = express.json();
+app.use(express.json());
 
 
 app.get('/', (req,res) => {   
