@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors'
-import { blogsRouter } from './routers/blogsRouter';
-import { postsRouter } from './routers/postsRouter';
-import { deleteAllController } from './routers/deleteAllController';
+import { blogsRouter } from './variety/blogs/blogRouter';
+import { postsRouter } from './variety/posts/postRouter';
+import { deleteAllController } from './deleteAllController';
 import { URL_PATH } from './setting';
 
 

@@ -3,6 +3,10 @@ import {HTTP_STATUSES, URL_PATH} from '../../src/setting';
 import {app} from '../../src/app'
 import { BlogInputModel, BlogViewModel } from "../../src/types";
 
+const Authorization = {
+      value: "Basic YWRtaW46cXdlcnR5",
+      false: "Df fef"
+};
 
 describe('/blogs', () => {
 
@@ -32,7 +36,7 @@ describe('/blogs', () => {
         let createdResponse = await 
                 request(app)
                 .post(URL_PATH.blogs)
-                .set("Authorization", "Basic YWRtaW46cXdlcnR5")
+                .set("Authorization", Authorization.value)
                 .send(data)
                 .expect(HTTP_STATUSES.CREATED_201);
 
@@ -60,7 +64,7 @@ describe('/blogs', () => {
         let createdResponse2 = await 
                 request(app)
                 .post(URL_PATH.blogs)
-                .set("Authorization", "Basic YWRtaW46cXdlcnR5")
+                .set("Authorization", Authorization.value)
                 .send(data)
                 .expect(HTTP_STATUSES.CREATED_201);
 
@@ -88,7 +92,7 @@ describe('/blogs', () => {
         let createdResponse2 = await 
                 request(app)
                 .post(URL_PATH.blogs)
-                .set("Authorization", "Basic YWRtaW46cXdlcnR5")
+                .set("Authorization", Authorization.value)
                 .send(data)
                 .expect(HTTP_STATUSES.CREATED_201);
 
@@ -106,7 +110,7 @@ describe('/blogs', () => {
     it('should delete blog and return 204', async () => { // delete the third blog [delete.blog]
         await request(app)
             .delete(`${URL_PATH.blogs}/${createdItem3.id}`)
-            .set("Authorization", "Basic YWRtaW46cXdlcnR5")
+            .set("Authorization", Authorization.value)
             .expect(HTTP_STATUSES.NO_CONTENT_204);
     })
 
@@ -114,7 +118,7 @@ describe('/blogs', () => {
     it("shouldn't delete not exist blog and return 404", async () => { // delete not existing blog [delete.blog]
         await request(app)
             .delete(`${URL_PATH.blogs}/55`)
-            .set("Authorization", "Basic YWRtaW46cXdlcnR5")
+            .set("Authorization", Authorization.value)
             .expect(HTTP_STATUSES.NOT_FOUND_404);
     })
     
@@ -154,7 +158,7 @@ describe('/blogs', () => {
         
         let res = await request(app)
                         .post(URL_PATH.blogs)
-                        .set("Authorization", "Basic YWRtaW46cXdlcnR5")
+                        .set("Authorization", Authorization.value)
                         .send(data)
                         .expect(HTTP_STATUSES.BAD_REQUEST_400);
 
@@ -183,7 +187,7 @@ describe('/blogs', () => {
         
         let res = await request(app)
                         .post(URL_PATH.blogs)
-                        .set("Authorization", "Basic YWRtaW46cXdlcnR5")
+                        .set("Authorization", Authorization.value)
                         .send(data)
                         .expect(HTTP_STATUSES.BAD_REQUEST_400);
 
@@ -213,7 +217,7 @@ describe('/blogs', () => {
 
         await  request(app)
                 .put(`${URL_PATH.blogs}/${createdItem1.id}`)
-                .set("Authorization", "Basic YWRtaW46cXdlcnR5")
+                .set("Authorization", Authorization.value)
                 .send(data)
                 .expect(HTTP_STATUSES.NO_CONTENT_204);
         
@@ -233,7 +237,7 @@ describe('/blogs', () => {
 
         await request(app)
                 .put(`${URL_PATH.blogs}/454`)
-                .set("Authorization", "Basic YWRtaW46cXdlcnR5")
+                .set("Authorization", Authorization.value)
                 .send(data)
                 .expect(HTTP_STATUSES.NOT_FOUND_404);
     })
