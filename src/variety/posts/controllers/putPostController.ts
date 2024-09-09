@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { HTTP_STATUSES } from "../../../setting";
+
 import { postRepository } from "../repositories/index";
+
 import {PostInputModel, APIErrorResult } from '../../../types';
 
 export const putPostController = async (req: Request<{id: string},{},PostInputModel>, res: Response<APIErrorResult>) =>{

@@ -1,12 +1,12 @@
-import { PostViewModel, PostInputModel, BlogViewModel } from "../types";
-import {db} from "../db/db"
-import { blogRepository } from "./blogRepository";
+import { PostViewModel, PostInputModel, BlogViewModel } from "../../types";
+import {db} from "../../db/db"
+import { blogRepository } from "../blogs/blogRepository";
 
 export const postRepository = {
 
  // searches for a post by id and returns the post or null
-    find(id: string): PostViewModel | null {
-        const searchItem: PostViewModel = db.posts.find(c => c.id === id);//Promise
+    async find(id: string): Promise < PostViewModel | null > {
+        const searchItem: PostViewModel = db.posts.find(c => c.id === id);
         
         if(!searchItem) 
             return null;
@@ -15,13 +15,13 @@ export const postRepository = {
     },
      
 // creates new post and returns this post    
-    create(createItem: PostInputModel): PostViewModel{
+    async create(createItem: PostInputModel): Promise <PostViewModel>{
 
         let today = new Date();
         const id = today.getHours() * 1000000000 + today.getMinutes() * 1000000 + today.getSeconds() * 1000 + today.getMilliseconds();
         let blogName: string;
         try{
-            const parentBlog: BlogViewModel | null = blogRepository.find(createItem.blogId); // Promise ?
+            const parentBlog:  BlogViewModel | null  = await blogRepository.find(createItem.blogId); 
             if(!parentBlog)
                 throw `blog with ID: ${createItem.blogId} doesn't exist`;
             blogName = parentBlog.name; 
@@ -40,21 +40,21 @@ export const postRepository = {
           blogId: createItem.blogId,
           blogName: blogName
         }           
-        db.posts.push(newPost); //Promise
+        db.posts.push(newPost); 
         return newPost;
     },
 
     // deletes a post by Id, returns true if the post existed
-    delete(id: string): boolean { 
-        if(db.posts.findIndex(n => n.id === id) == -1)//Promise
+    async delete(id: string): Promise < boolean > { 
+        if(db.posts.findIndex(n => n.id === id) == -1)
             return false;
-        db.posts = db.posts.filter(n => n.id !== id);//Promise
+        db.posts = db.posts.filter(n => n.id !== id);
         return true;
     },
    
 // edits a post by ID, if the post is not found returns false    
-    edit(id: string, correctPost: PostInputModel): boolean{
-        const foundPost: PostViewModel = db.posts.find(c => c.id === id);//Promise
+    async edit(id: string, correctPost: PostInputModel): Promise <boolean> {
+        const foundPost: PostViewModel = db.posts.find(c => c.id === id);
         if(!foundPost)
             return false;
 
@@ -66,7 +66,7 @@ export const postRepository = {
 
             foundPost.blogId = correctPost.blogId;  
             try{
-                const parentBlog: BlogViewModel | null = blogRepository.find(correctPost.blogId); // Promise ?
+                const parentBlog:  BlogViewModel | null  = await blogRepository.find(correctPost.blogId); 
                 if(!parentBlog)
                     throw `blog with ID: ${correctPost.blogId} doesn't exist`;
                 foundPost.blogName = parentBlog.name; 
@@ -81,9 +81,15 @@ export const postRepository = {
         return true;
     },
 
+// deletes all posts from base
+    async clear(): Promise < boolean > {
+        db.posts = [];
+        return true;
+    },
+
 // returns list of all posts 
-    view(): PostViewModel[]{
-        const posts: PostViewModel[] = db.posts;//Promise
+    async view(): Promise <PostViewModel[]> {
+        const posts: PostViewModel[] = db.posts;
         return posts;
     }
  

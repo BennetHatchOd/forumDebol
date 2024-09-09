@@ -1,11 +1,11 @@
-import { BlogViewModel, BlogInputModel } from "../types";
-import {db} from "../db/db"
+import { BlogViewModel, BlogInputModel } from "../../types";
+import {db} from "../../db/db"
 
 export const blogRepository = {
 
  // searches for a blog by id and returns the blog or null
-    find(id: string): BlogViewModel | null {
-        const searchItem: BlogViewModel = db.blogs.find(c => c.id === id);//Promise
+    async find(id: string): Promise < BlogViewModel | null > {
+        const searchItem: BlogViewModel = db.blogs.find(c => c.id === id)
         
     if(!searchItem) 
         return null;
@@ -14,7 +14,7 @@ export const blogRepository = {
     },
  
 // creates new blog and returns this blog    
-    create(createItem: BlogInputModel): BlogViewModel{
+    async create(createItem: BlogInputModel): Promise < BlogViewModel>{
 
         let today = new Date();
         const id = today.getHours() * 1000000000 + today.getMinutes() * 1000000 + today.getSeconds() * 1000 + today.getMilliseconds();
@@ -31,16 +31,16 @@ export const blogRepository = {
 
 
 // deletes a blog by Id, returns true if the blog existed   
-    delete(id: string): boolean { 
-        if(db.blogs.findIndex(n => n.id === id) == -1)//Promise
+    async delete(id: string): Promise < boolean > { 
+        if(db.blogs.findIndex(n => n.id === id) == -1)
             return false;
-        db.blogs = db.blogs.filter(n => n.id !== id);//Promise
+        db.blogs = db.blogs.filter(n => n.id !== id);
         return true;
     },
 
 // edits a blog by ID, if the blog is not found returns false    
-    edit(id: string, correctBlog: BlogInputModel): boolean{
-        const foundBlog: BlogViewModel = db.blogs.find(c => c.id === id);//Promise
+    async edit(id: string, correctBlog: BlogInputModel): Promise < boolean >{
+        const foundBlog: BlogViewModel = db.blogs.find(c => c.id === id);
         if(!foundBlog)
             return false;
 
@@ -50,9 +50,15 @@ export const blogRepository = {
         return true;
     },
 
+// deletes all blogs from base
+    async clear(): Promise < boolean > {
+        db.blogs = [];
+        return true;
+    },
+
 // returns list of all blogs    
-    view(): BlogViewModel[]{
-        const blogs: BlogViewModel[] = db.blogs;//Promise
+    async view(): Promise < BlogViewModel[] > {
+        const blogs: BlogViewModel[] = db.blogs;
         return blogs;
     }
  
